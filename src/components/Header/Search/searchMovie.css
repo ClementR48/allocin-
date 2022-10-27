@@ -1,0 +1,11 @@
+.search_movie {
+  text-align: center;
+}
+
+.search_movie input {
+  padding: 7px;
+  width: 40vw;
+  outline: none;
+  position: relative;
+}
+

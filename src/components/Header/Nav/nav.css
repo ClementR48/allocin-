@@ -1,0 +1,29 @@
+.nav {
+  width: 80vw;
+  margin: 0 auto;
+}
+
+.nav_list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.nav_list li:hover {
+  background-color: rgb(254, 224, 102);
+}
+.nav_list li img {
+  width: 200px;
+}
+.nav_list li a {
+  padding: 10px;
+  color: black;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.nav_list a:hover {
+  background-color: rgb(254, 224, 102);
+}

@@ -1,0 +1,15 @@
+.home h1{
+  text-align: center;
+  margin: 100px;
+  font-size: 50px;
+}
+
+.home ul {
+  
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+

@@ -1,0 +1,13 @@
+.list_movies h1 {
+  text-align: center;
+  margin: 100px;
+  font-size: 50px;
+}
+
+.list_movies ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
