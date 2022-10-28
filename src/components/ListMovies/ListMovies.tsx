@@ -3,34 +3,37 @@ import { useState } from "react";
 import axios from "axios";
 import Card, { IMovie } from "../utils/Card";
 import "./listMovies.css";
+import SearchMovie from "../Header/Search/SearchMovie";
+import SearchGenres from "../Header/Search/SearchGenres";
 
-const ListMovies = () => {
-  const [movies, setMovies] = useState<IMovie[]>([]);
-  const [loading, setLoading] = useState(false);
-  useEffect(() => {
-    const getListMovies = () => {
-      setLoading(true);
-      axios
-        .get(
-          "https://api.themoviedb.org/3/list/1?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr"
-        )
-        .then((response) => {
-          setLoading(false);
-          setMovies(response.data.items);
-        });
-    };
-    getListMovies();
-  }, []);
+const ListMovies = (props: any) => {
   return (
     <main className="list_movies">
       <h1>Liste de film</h1>
+      {!props.loading && (
+        <>
+          <h2>{props?.ListMovies?.name}</h2>
+          <div className="search">
+            <SearchGenres
+              movies={props.movies}
+              setMovies={props.setMovies}
+              setSecondListMovie={props.setSecondListMovie}
+              secondListMovie={props.secondListMovie}
+            />
+            <SearchMovie
+              movies={props.movies}
+              setMovies={props.setMovies}
+              setSecondListMovie={props.setSecondListMovie}
+              secondListMovie={props.secondListMovie}
+            />
+          </div>
 
-      {!loading && (
-        <ul>
-          {movies.map((movie, index) => {
-            return <Card {...movie} />;
-          })}
-        </ul>
+          <ul>
+            {props.movies.map((movie: any, index: number) => {
+              return <Card {...movie} key={index} />;
+            })}
+          </ul>
+        </>
       )}
     </main>
   );

@@ -1,12 +1,11 @@
 import Nav from "./Nav/Nav";
 import SearchMovie from "./Search/SearchMovie";
-import '../Header/header.css';
+import "../Header/header.css";
 
-const Header = () => {
+const Header = (props: any) => {
   return (
     <header className="header">
       <Nav />
-      <SearchMovie />
     </header>
   );
 };
