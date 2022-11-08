@@ -1,8 +1,9 @@
 import React from "react";
-import { IMovie } from "../utils/Card";
+
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Card from "../utils/Card";
+import Card from "../../Card/Card";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
 
 const ListSeries = () => {
   const [series, setSeries] = useState<IMovie[]>([]);

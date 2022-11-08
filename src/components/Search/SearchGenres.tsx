@@ -2,20 +2,33 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "./searchGenres.css";
 import axios from "axios";
+import { IMovie } from "../Interfaces/MoviesInterfaces";
 
 export interface IGenres {
   id: number;
   name: string;
 }
 
-const SearchGenres = (props: any) => {
-  const [valueSearch, setValueSearch] = useState<number>();
+type SearchGenresProps = {
+  movies: IMovie[];
+  secondListMovie: IMovie[];
+  setMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
+  setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
+};
+
+const SearchGenres = ({
+  movies,
+  setMovies,
+  setSecondListMovie,
+  secondListMovie,
+}: SearchGenresProps) => {
+  const [valueSearch, setValueSearch] = useState<string>('');
   const [genres, setGenres] = useState<IGenres[]>([]);
 
-  const searchByGenre = (value: any) => {
-    if (value == '-1') props.setMovies(props.secondListMovie)
-    props.setMovies(
-      props.secondListMovie?.filter((movie: any) => {
+  const searchByGenre = (value: string) => {
+    if (value == "-1") setMovies(secondListMovie);
+    setMovies(
+      secondListMovie?.filter((movie: IMovie) => {
         return movie.genre_ids.includes(Number(value));
       })
     );
@@ -28,7 +41,6 @@ const SearchGenres = (props: any) => {
           "https://api.themoviedb.org/3/genre/movie/list?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr"
         )
         .then((response) => {
-          console.log(response.data.genres);
           setGenres(response.data.genres);
         });
     };
@@ -38,7 +50,6 @@ const SearchGenres = (props: any) => {
 
   useEffect(() => {
     searchByGenre(valueSearch);
-    console.log(props.movies);
     
   }, [valueSearch]);
 

@@ -1,18 +1,16 @@
-import React from "react";
+
 import { BrowserRouter, Route, Link, Routes } from "react-router-dom";
-import Auth from "./Auth/Auth";
+import Auth from "./pages/Auth/Auth";
 import Header from "./Header/Header";
-import Home from "./Home/Home";
-import ListMovies from './ListMovies/ListMovies';
-import ListSeries from "./ListSeries/ListSeries";
-import DetailMovie from "./DetailPage/DetailMovie";
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { IMovie } from "./utils/Card";
+import Home from "./pages/Home/Home";
+import ListSeries from "./pages/ListSeries/ListSeries";
+import DetailMovie from "./pages/DetailPage/DetailMovie";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
+
 
 export interface IListRoutes {
   HOME: string;
-  LISTMOVIES: string;
+  MOVIESPAGE: string;
   LISTSERIES: string;
   DETAILMOVIE: string;
   AUTH: string;
@@ -20,20 +18,15 @@ export interface IListRoutes {
 
 export const listRoutes: IListRoutes = {
   HOME: "/",
-  LISTMOVIES: "movies",
+  MOVIESPAGE: "movies",
   LISTSERIES: "tv-shows",
   DETAILMOVIE: "/movies/:movieId",
   AUTH: "authentification",
 };
 
-export interface IListMovie{
-  description: string,
-  id:number
-  name:string
-}
 
 const Router = () => {
-  const [movies, setMovies] = useState<IMovie[]>([]);
+ /*  const [movies, setMovies] = useState<IMovie[]>([]);
   const [secondListMovie, setSecondListMovie] = useState<IMovie[]>([]);
   const [listMovie, setListMovie] = useState();
   const [loading, setLoading] = useState(false);
@@ -46,32 +39,29 @@ const Router = () => {
         )
         .then((response) => {
           setLoading(false);
-          console.log(response.data.items);
-          
-          setListMovie(response.data)
+          setListMovie(response.data);
           setSecondListMovie(response.data.items);
           setMovies(response.data.items);
         });
     };
 
-    
     getListMovies();
-  }, []);
+  }, []); */
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path={listRoutes.HOME} element={<Home />} />
         <Route
-          path={listRoutes.LISTMOVIES}
+          path={listRoutes.MOVIESPAGE}
           element={
-            <ListMovies
-              movies={movies}
+            <MoviesPage 
+/*               movies={movies}
               ListMovies={listMovie}
               setMovies={setMovies}
               secondListMovie={secondListMovie}
               setSecondListMovie={setSecondListMovie}
-              loading={loading}
+              loading={loading} */
             />
           }
         />

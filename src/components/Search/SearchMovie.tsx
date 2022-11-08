@@ -1,20 +1,18 @@
 import React from "react";
 import "./searchMovie.css";
 import { useState, useEffect } from "react";
-import { IMovie } from "../../utils/Card";
 
 const SearchMovie = (props: any) => {
   const [valueSearch, setValueSearch] = useState<string>("");
 
-  const searchByTitle = (film: any) => {
-    props.setMovies(
-      props.secondListMovie?.filter((movie: any) => {
-        return movie.title.indexOf(valueSearch) !== -1;
-      })
-    );
-  };
-
   useEffect(() => {
+    const searchByTitle = (film: any) => {
+      props.setMovies(
+        props.secondListMovie?.filter((movie: any) => {
+          return movie.title.indexOf(film) !== -1;
+        })
+      );
+    };
     searchByTitle(valueSearch);
   }, [valueSearch]);
 

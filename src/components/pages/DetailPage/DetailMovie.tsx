@@ -32,7 +32,7 @@ const DetailMovie = () => {
           `https://api.themoviedb.org/3/movie/${movieId}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`
         )
         .then((response) => {
-          console.log(response.data);
+  
 
           setMovie(response.data);
           setLoading(false);

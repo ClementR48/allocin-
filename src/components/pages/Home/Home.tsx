@@ -1,9 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Card from "../utils/Card";
-import { IMovie } from "../utils/Card";
+import Card from "../../Card/Card";
+
 import "./home.css";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
 
 const Home = () => {
   const [discoverMovies, setDiscoverMovies] = useState<IMovie[]>([]);

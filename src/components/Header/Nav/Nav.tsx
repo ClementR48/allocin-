@@ -22,7 +22,7 @@ const Nav = () => {
         </li>
         <li>
           <NavLink
-            to={listRoutes.LISTMOVIES}
+            to={listRoutes.MOVIESPAGE}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
             Movies

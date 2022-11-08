@@ -1,0 +1,84 @@
+.list_movies .title-container {
+  width: 100%;
+  height: 300px;
+  margin: 100px auto 50px;
+  position: relative;
+}
+
+.list_movies .title-container button {
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
+  cursor: pointer;
+  background-color: transparent;
+  border-color: white;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  font-size: 35px;
+}
+.list_movies .title-container button:hover{
+  box-shadow: 1px 1px 1px white;
+}
+.list_movies .title-container .btn-left {
+  left: 0;
+}
+.list_movies .title-container .btn-right {
+  right: 0;
+}
+
+.list_movies h1 {
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  right: 0;
+  top: 0;
+  transform: translate(-50%, 50%);
+  font-size: 50px;
+  color: white;
+  text-shadow: brown 0px 2px 3px;
+  font-style: italic;
+  z-index: 1;
+  letter-spacing: 5px;
+}
+.list_movies .title-container img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(2px);
+}
+.list_movies .title-container span {
+  position: absolute;
+  bottom: -20px;
+  right: 0;
+  font-style: italic;
+  font-size: 14px;
+}
+.list_movies .description-list {
+  text-align: center;
+}
+
+.list_movies ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list_movies {
+  margin: 0 auto;
+  width: 80vw;
+}
+.list_movies .search {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
