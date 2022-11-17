@@ -1,19 +1,27 @@
-import React from "react";
 import "./searchMovie.css";
 import { useState, useEffect } from "react";
+import { IMovie } from "../Interfaces/MoviesInterfaces";
 
-const SearchMovie = (props: any) => {
+
+type SearchMoviesProps = {
+  movies: IMovie[];
+  setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
+};
+
+const SearchMovie = ({movies, setSecondListMovie}: SearchMoviesProps) => {
   const [valueSearch, setValueSearch] = useState<string>("");
 
+
+  const searchByTitle = () => {
+    setSecondListMovie((prev) =>
+      movies?.filter((movie: IMovie) => {
+        return movie.title.toLowerCase().includes(valueSearch.toLowerCase());
+      })
+    );
+  };
+
   useEffect(() => {
-    const searchByTitle = (film: any) => {
-      props.setMovies(
-        props.secondListMovie?.filter((movie: any) => {
-          return movie.title.indexOf(film) !== -1;
-        })
-      );
-    };
-    searchByTitle(valueSearch);
+    searchByTitle();
   }, [valueSearch]);
 
   return (

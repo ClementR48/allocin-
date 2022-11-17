@@ -11,27 +11,23 @@ export interface IGenres {
 
 type SearchGenresProps = {
   movies: IMovie[];
-  secondListMovie: IMovie[];
-  setMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
   setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
 };
 
 const SearchGenres = ({
   movies,
-  setMovies,
   setSecondListMovie,
-  secondListMovie,
 }: SearchGenresProps) => {
-  const [valueSearch, setValueSearch] = useState<string>('');
+  const [valueSearch, setValueSearch] = useState<string>('-1');
   const [genres, setGenres] = useState<IGenres[]>([]);
 
-  const searchByGenre = (value: string) => {
-    if (value == "-1") setMovies(secondListMovie);
-    setMovies(
-      secondListMovie?.filter((movie: IMovie) => {
-        return movie.genre_ids.includes(Number(value));
+  const searchByGenre = () => {
+     valueSearch === '-1'? setSecondListMovie(movies) : setSecondListMovie((prev) =>
+      movies?.filter((movie: IMovie) => {
+        return movie.genre_ids.includes(Number(valueSearch));
       })
-    );
+    ); 
+    
   };
 
   useEffect(() => {
@@ -49,8 +45,7 @@ const SearchGenres = ({
   }, []);
 
   useEffect(() => {
-    searchByGenre(valueSearch);
-    
+    searchByGenre();
   }, [valueSearch]);
 
   return (
