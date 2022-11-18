@@ -78,6 +78,7 @@
   width: 80vw;
 }
 .list_movies .search {
+  margin: 50px 0;
   display: flex;
   align-items: center;
   justify-content: space-around;

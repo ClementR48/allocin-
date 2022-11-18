@@ -17,3 +17,19 @@ export interface IList {
   poster_path: string;
   items: IMovie[];
 }
+
+export interface IFilm {
+  genres: [
+    {
+      id: number;
+      name: string;
+    }
+  ];
+  id: number;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  title: string;
+  tagline: string;
+  release_date: string;
+}

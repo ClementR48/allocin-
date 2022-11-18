@@ -5,7 +5,6 @@ import "./moviesPage.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { IList, IMovie } from "../../Interfaces/MoviesInterfaces";
-import SearchList from "../../Search/SearchList";
 import ListsMovies from "./ListsMovies/ListsMovies";
 
 
@@ -17,10 +16,11 @@ const MoviesPage = () => {
   const [loading, setLoading] = useState(false);
   const [idList, setIdList] = useState<number>(1);
 
-  const CancelToken = axios.CancelToken;
-  const source = CancelToken.source();
+ 
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
     const getListMovies = async () => {
       setLoading(true);
       const response = await axios
@@ -40,6 +40,10 @@ const MoviesPage = () => {
     };
 
     getListMovies();
+
+    return () => {
+      source.cancel()
+    }
   }, [idList]);
 
   
