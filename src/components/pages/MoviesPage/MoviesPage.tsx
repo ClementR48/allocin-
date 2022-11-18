@@ -3,9 +3,9 @@ import SearchGenres from "../../Search/SearchGenres";
 import SearchMovie from "../../Search/SearchMovie";
 import "./moviesPage.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { IList, IMovie } from "../../Interfaces/MoviesInterfaces";
 import ListsMovies from "./ListsMovies/ListsMovies";
+import { fetchData } from "../../utils/FetchData";
 
 
 
@@ -19,7 +19,18 @@ const MoviesPage = () => {
  
 
   useEffect(() => {
-    const CancelToken = axios.CancelToken;
+
+    const objState = {
+      setLoading,
+      mainState: setListMovie,
+      secondMainState: setMovies,
+      duplicateData: setMoviesDuplicate
+    }
+
+    const url = `https://api.themoviedb.org/3/list/${idList}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`
+
+    fetchData(url, objState)
+    /* const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
     const getListMovies = async () => {
       setLoading(true);
@@ -43,7 +54,7 @@ const MoviesPage = () => {
 
     return () => {
       source.cancel()
-    }
+    } */
   }, [idList]);
 
   

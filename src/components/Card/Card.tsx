@@ -16,7 +16,7 @@ export interface ISerie {
 
 const Card = (props: IMovie) => {
   return (
-    <li className="card">
+    <li className="card" >
       <Link to={`/movies/${props.id}`}>
         <div className="image">
           <img
