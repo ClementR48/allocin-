@@ -12,8 +12,8 @@ export const fetchData = (url: string, states: any) => {
       try {
         states.setLoading(false)
         states.mainState(response.data)
-        states.secondMainState(response.data.items)
-        states.duplicateData(response.data.items)
+        states.secondMainState(response.data)
+        states.duplicateData(response.data)
         
         
       } catch (error) {

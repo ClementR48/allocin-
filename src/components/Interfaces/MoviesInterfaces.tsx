@@ -1,3 +1,8 @@
+export type IData = {
+  results?: IMovie[]
+  items?: IMovie[]
+}
+
 export interface IMovie {
   id: number;
   genre_ids: number[];
@@ -33,3 +38,5 @@ export interface IFilm {
   tagline: string;
   release_date: string;
 }
+
+

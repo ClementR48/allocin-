@@ -14,20 +14,18 @@ type SearchGenresProps = {
   setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
 };
 
-const SearchGenres = ({
-  movies,
-  setSecondListMovie,
-}: SearchGenresProps) => {
-  const [valueSearch, setValueSearch] = useState<string>('-1');
+const SearchGenres = ({ movies, setSecondListMovie }: SearchGenresProps) => {
+  const [valueSearch, setValueSearch] = useState<string>("-1");
   const [genres, setGenres] = useState<IGenres[]>([]);
 
   const searchByGenre = () => {
-     valueSearch === '-1'? setSecondListMovie(movies) : setSecondListMovie((prev) =>
-      movies?.filter((movie: IMovie) => {
-        return movie.genre_ids.includes(Number(valueSearch));
-      })
-    ); 
-    
+    valueSearch === "-1"
+      ? setSecondListMovie(movies)
+      : setSecondListMovie(
+          movies.filter((movie: IMovie) => {
+            return movie.genre_ids.includes(Number(valueSearch));
+          })
+        );
   };
 
   useEffect(() => {
