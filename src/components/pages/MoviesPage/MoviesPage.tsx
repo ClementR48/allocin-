@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { IList, IMovie } from "../../Interfaces/MoviesInterfaces";
 import ListsMovies from "./ListsMovies/ListsMovies";
 import { fetchData } from "../../utils/FetchData";
+import Loader from "../../Loader/Loader";
 
 const MoviesPage = () => {
   const [movies, setMovies] = useState<IList>();
@@ -24,42 +25,42 @@ const MoviesPage = () => {
 
     const url = `https://api.themoviedb.org/3/list/${idList}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`;
 
-    fetchData(url, objState)
+    fetchData(url, objState);
   }, [idList]);
+
+  if (loading) return <Loader />;
 
   return (
     <main className="list_movies">
       <>
-        {!loading && (
-          <>
-            <ListsMovies
-              idList={idList}
-              setIdList={setIdList}
-              listMovie={listMovie}
+        <>
+          <ListsMovies
+            idList={idList}
+            setIdList={setIdList}
+            listMovie={listMovie}
+          />
+
+          <div className="search">
+            <SearchGenres
+              movies={movies?.items || []}
+              setSecondListMovie={setMoviesDuplicate}
             />
+            <SearchMovie
+              movies={movies?.items || []}
+              setSecondListMovie={setMoviesDuplicate}
+            />
+          </div>
 
-            <div className="search">
-              <SearchGenres
-                movies={movies?.items || []}
-                setSecondListMovie={setMoviesDuplicate}
-              />
-              <SearchMovie
-                movies={movies?.items || []}
-                setSecondListMovie={setMoviesDuplicate}
-              />
-            </div>
-
-            <ul>
-              {moviesDuplicate.length > 0 ? (
-                moviesDuplicate?.map((movie: IMovie, index: number) => {
-                  return <Card {...movie} key={index} />;
-                })
-              ) : (
-                <h2>Il n'y pas de film</h2>
-              )}
-            </ul>
-          </>
-        )}
+          <ul>
+            {moviesDuplicate.length > 0 ? (
+              moviesDuplicate?.map((movie: IMovie, index: number) => {
+                return <Card {...movie} key={index} />;
+              })
+            ) : (
+              <h2>Il n'y pas de film</h2>
+            )}
+          </ul>
+        </>
       </>
     </main>
   );

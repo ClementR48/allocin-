@@ -18,6 +18,8 @@ const Home = () => {
     fetchData(url, objState);
   }, []);
 
+  
+
   return (
     <main className="home">
       <h1>Découverte du mois</h1>
