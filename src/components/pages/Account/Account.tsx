@@ -1,7 +1,7 @@
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { INewUser } from "../../Interfaces/UserInterfaces";
 import Loader from "../../Loader/Loader";
-import { fetchData, updateData } from "../../utils/FetchData";
+import { fetchData } from "../../utils/FetchData";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -40,7 +40,7 @@ const Account = ({ setToken }: IProps) => {
     navigate("/authentification");
   };
 
-  const updateUser = async (e) => {
+  const updateUser = async (e: any) => {
     e.preventDefault();
     const url = "https://api-ri7.herokuapp.com/api/users/profile";
 

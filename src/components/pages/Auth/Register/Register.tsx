@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 import { INewUser } from "../../../Interfaces/UserInterfaces";
 
+interface IProps {
+  setIsRegister: Dispatch<SetStateAction<boolean>>;
+}
 
-
-const Register = () => {
+const Register = ({ setIsRegister }: IProps) => {
   const [user, setUser] = useState<INewUser>({
     firstname: "",
     lastname: "",
@@ -14,7 +16,7 @@ const Register = () => {
     password: "",
   });
 
-  const [message, setMessage] = useState<boolean>(false)
+  const [message, setMessage] = useState<boolean>(false);
 
   const createUser = (e: any) => {
     e.preventDefault();
@@ -28,64 +30,69 @@ const Register = () => {
         password: user.password,
       })
       .then((response) => {
-        console.log(response)
-        setMessage(true)
+        console.log(response);
+        setMessage(true);
       });
   };
 
   return (
-    <form onSubmit={(e) => createUser(e)}>
-      <label htmlFor="">
-        Firstname
+    <div className="register">
+      <h1>INSCRIVEZ-VOUS EN 2 SECONDES</h1>
+      <form onSubmit={(e) => createUser(e)}>
         <input
           type="text"
+          placeholder="PRENOM"
           value={user.firstname}
           onChange={(e) => setUser({ ...user, firstname: e.target.value })}
         />
-      </label>
-      <label htmlFor="">
-        Lastname
+
         <input
           type="text"
+          placeholder="NOM"
           value={user.lastname}
           onChange={(e) => setUser({ ...user, lastname: e.target.value })}
         />
-      </label>
-      <label htmlFor="">
-        City
+
         <input
           type="text"
+          placeholder="VILLE"
           value={user.city}
           onChange={(e) => setUser({ ...user, city: e.target.value })}
         />
-      </label>
-      <label htmlFor="">
-        postalCode
+
         <input
           type="text"
+          placeholder="CODE POSTAL"
           value={user.postalCode}
           onChange={(e) => setUser({ ...user, postalCode: e.target.value })}
         />
-      </label>
-      <label htmlFor="">
-        email
+
         <input
           type="text"
+          placeholder="EMAIL"
           value={user.email}
           onChange={(e) => setUser({ ...user, email: e.target.value })}
         />
-      </label>
-      <label htmlFor="">
-        password
+
         <input
           type="password"
+          placeholder="MOT DE PASSE"
           value={user.password}
           onChange={(e) => setUser({ ...user, password: e.target.value })}
         />
-      </label>
-      <button>Submit</button>
-      {message && <h2>`L'utilisateur {user.firstname} {user.lastname} a bien été créé`</h2>}
-    </form>
+
+        <button className="btn-login">CONTINUER</button>
+        {message && (
+          <h2>
+            `L'utilisateur {user.firstname} {user.lastname} a bien été créé`
+          </h2>
+        )}
+      </form>
+      <p className="login-account">
+        Déjà un compte
+        <button onClick={() => setIsRegister(false)}>Connectez-vous</button>
+      </p>
+    </div>
   );
 };
 

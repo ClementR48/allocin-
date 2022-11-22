@@ -30,7 +30,7 @@ const Router = () => {
   const [token, setToken] = useState("");
   useEffect(() => {
     const storage = sessionStorage.getItem("tokenUser");
-    setToken(storage);
+    setToken(storage as string);
   }, []);
   return (
     <BrowserRouter>
