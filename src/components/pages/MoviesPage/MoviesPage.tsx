@@ -2,66 +2,43 @@ import Card from "../../Card/Card";
 import SearchGenres from "../../Search/SearchGenres";
 import SearchMovie from "../../Search/SearchMovie";
 import "./moviesPage.css";
-import { useState, useEffect } from "react";
-import { IList, IMovie } from "../../Interfaces/MoviesInterfaces";
+import { useState, useEffect, useContext } from "react";
+import { IList, IMovie } from "../../../Interfaces/MoviesInterfaces";
 import ListsMovies from "./ListsMovies/ListsMovies";
-import { fetchData } from "../../utils/FetchData";
+import { fetchData } from "../../../utils/FetchData";
 import Loader from "../../Loader/Loader";
+import { MyContext, Icontext } from "../../../store/AppContext";
 
 const MoviesPage = () => {
-  const [movies, setMovies] = useState<IList>();
-  const [moviesDuplicate, setMoviesDuplicate] = useState<IMovie[]>([]);
-  const [listMovie, setListMovie] = useState<IList>();
-  const [loading, setLoading] = useState(false);
   const [idList, setIdList] = useState<number>(1);
 
-  useEffect(() => {
-    const objState = {
-      setLoading,
-      mainState: setListMovie,
-      secondMainState: setMovies,
-      duplicateData: setMoviesDuplicate,
-    };
+  const { store, setStore } = useContext(MyContext) as Icontext;
 
+  useEffect(() => {
     const url = `https://api.themoviedb.org/3/list/${idList}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`;
 
-    fetchData(url, objState);
+    fetchData(url, setStore, store, "listMovie");
   }, [idList]);
 
-  if (loading) return <Loader />;
+  if (store.loading) return <Loader />;
+  if (store.error) return <h1>{store.error}</h1>;
 
   return (
     <main className="list_movies">
-      <>
-        <>
-          <ListsMovies
-            idList={idList}
-            setIdList={setIdList}
-            listMovie={listMovie}
-          />
-
-          <div className="search">
-            <SearchGenres
-              movies={movies?.items || []}
-              setSecondListMovie={setMoviesDuplicate}
-            />
-            <SearchMovie
-              movies={movies?.items || []}
-              setSecondListMovie={setMoviesDuplicate}
-            />
-          </div>
-
-          <ul>
-            {moviesDuplicate.length > 0 ? (
-              moviesDuplicate?.map((movie: IMovie, index: number) => {
-                return <Card {...movie} key={index} />;
-              })
-            ) : (
-              <h2>Il n'y pas de film</h2>
-            )}
-          </ul>
-        </>
-      </>
+      <ListsMovies idList={idList} setIdList={setIdList} />
+      <div className="search">
+        <SearchGenres />
+        <SearchMovie />
+      </div>
+      <ul>
+        {store?.movies && store.movies.length > 0 ? (
+          store?.movies?.map((movie: IMovie, index: number) => {
+            return <Card {...movie} key={index} />;
+          })
+        ) : (
+          <h2>Il n'y pas de film</h2>
+        )}
+      </ul>
     </main>
   );
 };

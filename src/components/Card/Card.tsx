@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { IMovie } from "../Interfaces/MoviesInterfaces";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
 import "./card.css";
 
 export interface ISerie {

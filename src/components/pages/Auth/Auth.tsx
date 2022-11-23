@@ -8,7 +8,7 @@ interface IProps {
   setToken: Dispatch<SetStateAction<string>>;
 }
 
-const Auth = ({ setToken }: IProps) => {
+const Auth = () => {
   const [isRegister, setIsRegister] = useState(false);
   return (
     <main className="auth">
@@ -25,7 +25,7 @@ const Auth = ({ setToken }: IProps) => {
           </>
         ) : (
           <>
-            <Login setToken={setToken} setIsRegister={setIsRegister} />
+            <Login setIsRegister={setIsRegister} />
           </>
         )}
       </div>

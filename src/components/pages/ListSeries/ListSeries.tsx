@@ -3,7 +3,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../../Card/Card";
-import { IMovie } from "../../Interfaces/MoviesInterfaces";
+import { IMovie } from "../../../Interfaces/MoviesInterfaces";
 
 const ListSeries = () => {
   const [series, setSeries] = useState<IMovie[]>([]);

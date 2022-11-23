@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import Card from "../../Card/Card";
 
 import "./home.css";
-import { IData } from "../../Interfaces/MoviesInterfaces";
-import { fetchData } from "../../utils/FetchData";
+import { IData } from "../../../Interfaces/MoviesInterfaces";
+import { fetchData } from "../../../utils/FetchData";
+import Loader from "../../Loader/Loader";
 
 const Home = () => {
   const [discoverMovies, setDiscoverMovies] = useState<IData>();
@@ -18,20 +19,17 @@ const Home = () => {
     fetchData(url, objState);
   }, []);
 
-  
+  if(loading) return <Loader />
 
   return (
     <main className="home">
       <h1>Découverte du mois</h1>
-      {!loading ? (
-        <ul>
-          {discoverMovies?.results?.map((movie, index) => {
-            return <Card {...movie} />;
-          })}
-        </ul>
-      ) : (
-        <p>WAIT</p>
-      )}
+
+      <ul>
+        {discoverMovies?.results?.map((movie, index) => {
+          return <Card {...movie} />;
+        })}
+      </ul>
     </main>
   );
 };

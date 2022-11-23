@@ -1,8 +1,10 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./login.css";
+import { MyContext, Icontext } from "../../../../store/AppContext";
+import { listRoutes } from "../../../Router";
 
 interface UserLogin {
   email: string;
@@ -10,11 +12,13 @@ interface UserLogin {
 }
 
 interface IProps {
-  setToken: Dispatch<SetStateAction<string>>;
   setIsRegister: Dispatch<SetStateAction<boolean>>;
 }
 
-const Login = ({ setToken, setIsRegister }: IProps) => {
+const Login = ({ setIsRegister }: IProps) => {
+  const { store, setStore } = useContext(MyContext) as Icontext;
+  const [error, setError] = useState<string>("");
+
   const [userLogin, setUserLogin] = useState<UserLogin>({
     email: "",
     password: "",
@@ -30,10 +34,16 @@ const Login = ({ setToken, setIsRegister }: IProps) => {
         password: userLogin.password,
       })
       .then((response) => {
-        setToken(response.data.token);
         sessionStorage.setItem("tokenUser", response.data.token);
+        setStore({
+          ...store,
+          isUserAuth: response.data.token,
+        });
+        navigate(listRoutes.MOVIESPAGE);
       })
-      .then(() => navigate("/"));
+      .catch((err) => {
+        setError(err.response.data.error);
+      });
   };
 
   return (
@@ -60,6 +70,7 @@ const Login = ({ setToken, setIsRegister }: IProps) => {
         <span className="forgot-password">Mot de passe oublié ?</span>
 
         <button className="btn-login">SE CONNECTER</button>
+        <p style={{ fontSize: "12px", fontStyle: "italic" }}>{error}</p>
       </form>
       <p className="no-compte">
         Si vous n'avez pas encore de compte?

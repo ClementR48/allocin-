@@ -1,31 +1,31 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./searchGenres.css";
 import axios from "axios";
-import { IMovie } from "../Interfaces/MoviesInterfaces";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
+import { MyContext, Icontext } from "../../store/AppContext";
 
 export interface IGenres {
   id: number;
   name: string;
 }
 
-type SearchGenresProps = {
-  movies: IMovie[];
-  setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
-};
 
-const SearchGenres = ({ movies, setSecondListMovie }: SearchGenresProps) => {
+const SearchGenres = () => {
   const [valueSearch, setValueSearch] = useState<string>("-1");
   const [genres, setGenres] = useState<IGenres[]>([]);
 
+  const { store, setStore } = useContext(MyContext) as Icontext;
+
   const searchByGenre = () => {
     valueSearch === "-1"
-      ? setSecondListMovie(movies)
-      : setSecondListMovie(
-          movies.filter((movie: IMovie) => {
+      ? setStore({ ...store, movies: store.listMovie?.items })
+      : setStore({
+          ...store,
+          movies: store.listMovie?.items.filter((movie: IMovie) => {
             return movie.genre_ids.includes(Number(valueSearch));
-          })
-        );
+          }),
+        });
   };
 
   useEffect(() => {

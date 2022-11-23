@@ -1,37 +1,38 @@
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useContext } from "react";
 import axios from "axios";
-import { INewUser } from "../../../Interfaces/UserInterfaces";
+import { MyContext, Icontext } from "../../../../store/AppContext";
 
 interface IProps {
   setIsRegister: Dispatch<SetStateAction<boolean>>;
 }
 
 const Register = ({ setIsRegister }: IProps) => {
-  const [user, setUser] = useState<INewUser>({
-    firstname: "",
-    lastname: "",
-    city: "",
-    postalCode: "",
-    email: "",
-    password: "",
-  });
+  const { store, setStore } = useContext(MyContext) as Icontext;
 
-  const [message, setMessage] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>("");
 
   const createUser = (e: any) => {
     e.preventDefault();
     axios
       .post("https://api-ri7.herokuapp.com/api/users/register", {
-        firstname: user.firstname,
-        lastname: user.lastname,
-        city: user.city,
-        postalCode: user.postalCode,
-        email: user.email,
-        password: user.password,
+        avatar: store.user.avatar,
+        firstname: store.user.firstname,
+        lastname: store.user.lastname,
+        city: store.user.city,
+        postalCode: store.user.postalCode,
+        email: store.user.email,
+        password: store.user.password,
       })
-      .then((response) => {
-        console.log(response);
-        setMessage(true);
+      .then((res) => {
+        setMessage(
+          `L'utilisateur ${store.user.firstname} ${store.user.lastname} a bien été créé`
+        );
+        setTimeout(() => {
+          setIsRegister(false);
+        }, 2000);
+      })
+      .catch((err) => {
+        setMessage(err.response.data);
       });
   };
 
@@ -41,52 +42,98 @@ const Register = ({ setIsRegister }: IProps) => {
       <form onSubmit={(e) => createUser(e)}>
         <input
           type="text"
-          placeholder="PRENOM"
-          value={user.firstname}
-          onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+          placeholder="AVATAR"
+          value={store.user.avatar}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, avatar: e.target.value },
+            })
+          }
         />
-
+        <input
+          type="text"
+          placeholder="PRENOM"
+          value={store.user.firstname}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, firstname: e.target.value },
+            })
+          }
+        />
         <input
           type="text"
           placeholder="NOM"
-          value={user.lastname}
-          onChange={(e) => setUser({ ...user, lastname: e.target.value })}
+          value={store.user.lastname}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, lastname: e.target.value },
+            })
+          }
         />
 
         <input
           type="text"
           placeholder="VILLE"
-          value={user.city}
-          onChange={(e) => setUser({ ...user, city: e.target.value })}
+          value={store.user.city}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, city: e.target.value },
+            })
+          }
         />
 
         <input
           type="text"
           placeholder="CODE POSTAL"
-          value={user.postalCode}
-          onChange={(e) => setUser({ ...user, postalCode: e.target.value })}
+          value={store.user.postalCode}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, postalCode: e.target.value },
+            })
+          }
         />
 
         <input
           type="text"
           placeholder="EMAIL"
-          value={user.email}
-          onChange={(e) => setUser({ ...user, email: e.target.value })}
+          value={store.user.email}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, email: e.target.value },
+            })
+          }
         />
 
         <input
           type="password"
           placeholder="MOT DE PASSE"
-          value={user.password}
-          onChange={(e) => setUser({ ...user, password: e.target.value })}
+          value={store.user.password}
+          onChange={(e) =>
+            setStore({
+              ...store,
+              user: { ...store.user, password: e.target.value },
+            })
+          }
         />
 
         <button className="btn-login">CONTINUER</button>
-        {message && (
-          <h2>
-            `L'utilisateur {user.firstname} {user.lastname} a bien été créé`
-          </h2>
-        )}
+
+        <p
+          style={{
+            fontSize: "14px",
+            fontStyle: "italic",
+            textAlign: "center",
+            marginTop: "10px",
+          }}
+        >
+          {message}
+        </p>
       </form>
       <p className="login-account">
         Déjà un compte

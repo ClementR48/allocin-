@@ -1,4 +1,5 @@
 export interface INewUser {
+  avatar: string
   firstname: string;
   lastname: string;
   city: string;
