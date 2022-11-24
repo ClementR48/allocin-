@@ -1,14 +1,12 @@
 import {
   useEffect,
   useState,
-  Dispatch,
-  SetStateAction,
   useContext,
 } from "react";
-import { INewUser } from "../../../Interfaces/UserInterfaces";
+
 import Loader from "../../Loader/Loader";
 import { fetchData } from "../../../utils/FetchData";
-import { useNavigate } from "react-router-dom";
+
 import axios from "axios";
 import "./account.css";
 import { MyContext, Icontext } from "../../../store/AppContext";

@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { IFilm, IList, IMovie } from "../Interfaces/MoviesInterfaces";
+import { IData, IFilm, IList, IMovie } from "../Interfaces/MoviesInterfaces";
 import { INewUser } from "../Interfaces/UserInterfaces";
 
 export interface Icontext {
@@ -15,6 +15,7 @@ export interface Istore {
   error: string;
   movie: IFilm | null;
   user: INewUser ;
+  moviesDiscover: IData | null;
 }
 
 export const MyContext = createContext<Icontext | null>(null);
@@ -27,6 +28,7 @@ export const AppContext = ({ children }: any) => {
     loading: false,
     error: "",
     movie: null,
+    moviesDiscover: null,
     user: {
       avatar: "",
       firstname: "",

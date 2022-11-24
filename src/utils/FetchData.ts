@@ -41,6 +41,8 @@ export const fetchData = (
           });
         if (nameData === "detailsMovie")
           setStore({ ...store, movie: res.data, loading: false });
+        if (nameData === "moviesDiscover")
+          setStore({ ...store, moviesDiscover: res.data, loading: false });
         if (nameData === "myAccount")
           setStore({ ...store, user: res.data, loading: false });
       })

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Auth from "./pages/Auth/Auth";
-import Header from "./Header/Header";
 import Home from "./pages/Home/Home";
 import ListSeries from "./pages/ListSeries/ListSeries";
 import DetailMovie from "./pages/DetailPage/DetailMovie";
