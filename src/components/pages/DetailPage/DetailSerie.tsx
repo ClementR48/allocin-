@@ -5,15 +5,17 @@ import { fetchData } from "../../../utils/FetchData";
 import Loader from "../../Loader/Loader";
 import { MyContext, Icontext } from "../../../store/AppContext";
 
-const DetailMovie = () => {
-  let { movieId } = useParams();
+const DetailSerie = () => {
+  let { tvId } = useParams();
 
   const { store, setStore } = useContext(MyContext) as Icontext;
 
+  console.log(store)
+
   useEffect(() => {
-    const url = `https://api.themoviedb.org/3/movie/${movieId}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`;
-    fetchData(url, setStore, store, "detailsMovie");
-  }, [movieId]);
+    const url = `https://api.themoviedb.org/3/tv/${tvId}?api_key=28b26ad998b3319aff99b90c0c534ba4&language=fr-fr&include_image_language=fr`;
+    fetchData(url, setStore, store, "detailsSerie");
+  }, [tvId]);
 
   if (store.loading) return <Loader />;
   if (store.error) return <h1>{store.error}</h1>;
@@ -23,19 +25,19 @@ const DetailMovie = () => {
       <div className="container">
         <div className="image">
           <img
-            src={`https://image.tmdb.org/t/p/original${store.movie?.poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${store.serie?.poster_path}`}
             alt="affiche_movie"
           />
         </div>
         <div className="information-movie">
-          <h2>{store.movie?.title}</h2>
+          <h2>{store.serie?.name}</h2>
           <h3>{store.movie?.tagline}</h3>
-          <span>{store.movie?.release_date}</span>
-          <p className="description">{store.movie?.overview}</p>
+          <span>{store.serie?.first_air_date}</span>
+          <p className="description">{store.serie?.overview}</p>
 
           <ul className="list-genre">
             <h4>Genres : </h4>
-            {store.movie?.genres.map((genre) => {
+            {store.serie?.genres.map((genre) => {
               return <li key={genre.id}>{genre.name}</li>;
             })}
           </ul>
@@ -45,4 +47,4 @@ const DetailMovie = () => {
   );
 };
 
-export default DetailMovie;
+export default DetailSerie;

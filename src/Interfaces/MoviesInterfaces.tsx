@@ -1,6 +1,7 @@
+import { ISerie } from '../components/Card/Card';
 export type IData = {
-  results?: IMovie[]
-  items?: IMovie[]
+  results?: IMovie[] | ISerie[]
+  items?: IMovie[]| ISerie[]
 }
 
 export interface IMovie {

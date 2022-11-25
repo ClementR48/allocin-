@@ -1,23 +1,22 @@
 import "./searchMovie.css";
-import { useState, useEffect } from "react";
-import { IMovie } from "../Interfaces/MoviesInterfaces";
+import { useState, useEffect, useContext } from "react";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
+import { MyContext, Icontext } from "../../store/AppContext";
 
 
-type SearchMoviesProps = {
-  movies: IMovie[];
-  setSecondListMovie: React.Dispatch<React.SetStateAction<IMovie[]>>;
-};
 
-const SearchMovie = ({movies, setSecondListMovie}: SearchMoviesProps) => {
+const SearchMovie = () => {
   const [valueSearch, setValueSearch] = useState<string>("");
 
+  const { store, setStore } = useContext(MyContext) as Icontext;
 
   const searchByTitle = () => {
-    setSecondListMovie((prev) =>
-      movies?.filter((movie: IMovie) => {
+    setStore({
+      ...store,
+      movies: store.listMovie?.items.filter((movie: IMovie) => {
         return movie.title.toLowerCase().includes(valueSearch.toLowerCase());
-      })
-    );
+      }),
+    });
   };
 
   useEffect(() => {

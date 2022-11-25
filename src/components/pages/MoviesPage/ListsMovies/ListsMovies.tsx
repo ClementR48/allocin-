@@ -1,45 +1,43 @@
-import { IList } from "../../../Interfaces/MoviesInterfaces";
-
-
-
+import { IList } from "../../../../Interfaces/MoviesInterfaces";
+import { useContext } from "react";
+import { MyContext, Icontext } from "../../../../store/AppContext";
 
 type ListsMoviesType = {
-  idList: number
-  setIdList: React.Dispatch<React.SetStateAction<number>>
-  listMovie: IList | undefined
+  idList: number;
+  setIdList: React.Dispatch<React.SetStateAction<number>> ;
+  //setIdList: (idList: number) => void;
 };
 
- const ListsMovies = ({idList, setIdList, listMovie}: ListsMoviesType) => {
+const ListsMovies = ({ idList, setIdList }: ListsMoviesType) => {
+  const { store } = useContext(MyContext) as Icontext;
+
   return (
     <>
-    <div className="title-container">
-            {idList !== 1 && (
-              <button
-                className="btn-left"
-                onClick={() => setIdList((prev) => prev - 1)}
-              >
-                &#8592;
-              </button>
-            )}
-            <h1>{listMovie?.name}</h1>
-            <img
-              src={
-                listMovie &&
-                `https://image.tmdb.org/t/p/original${listMovie?.poster_path}`
-              }
-              alt="poster"
-            />
-            <button
-              className="btn-right"
-              onClick={() => setIdList((prev) => prev + 1)}
-            >
-              &#8594;
-            </button>
-            <span>{listMovie?.items?.length} films</span>
-          </div>
-          <div className="description-list">{listMovie?.description}</div>
-          </>
-  )
-}
+      <div className="title-container">
+        {idList !== 1 && (
+          <button
+            className="btn-left"
+            onClick={() => setIdList((prev) => prev - 1)}
+          >
+            &#8592;
+          </button>
+        )}
+        <h1 className="title-list">{store.listMovie?.name}</h1>
+        <img
+          src={`https://image.tmdb.org/t/p/original${store.listMovie?.poster_path}`}
+          alt="poster"
+        />
+        <button
+          className="btn-right"
+          onClick={() => setIdList((prev) => prev + 1)}
+        >
+          &#8594;
+        </button>
+        <span>{store.listMovie?.items?.length} films</span>
+      </div>
+      <div className="description-list">{store.listMovie?.description}</div>
+    </>
+  );
+};
 
-export default ListsMovies
+export default ListsMovies;

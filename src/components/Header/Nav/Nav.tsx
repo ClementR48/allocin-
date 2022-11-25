@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { listRoutes } from "../../Router";
 import "./nav.css";
 
+
 const Nav = () => {
   let activeStyle = {
     backgroundColor: "white",
@@ -38,10 +39,10 @@ const Nav = () => {
         </li>
         <li>
           <NavLink
-            to={listRoutes.AUTH}
+            to={listRoutes.ACCOUNT}
             style={({ isActive }) => (isActive ? activeStyle : undefined)}
           >
-            Authentification
+            My Account
           </NavLink>
         </li>
       </ul>

@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
-import { IMovie } from "../Interfaces/MoviesInterfaces";
+import { IMovie } from "../../Interfaces/MoviesInterfaces";
 import "./card.css";
 
 export interface ISerie {
   id: number;
   genre_ids: number[];
   original_language: string;
-  original_name: string;
+  name: string;
   overview: string;
   popularity: number;
   poster_path: string;
-  release_date: "2021-12-15";
   title: string;
+  first_air_date: string
+  genres: [{id: number, name: string}]
 }
 
 const Card = (props: IMovie) => {
