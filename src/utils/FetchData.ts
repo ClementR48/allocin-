@@ -43,6 +43,10 @@ export const fetchData = (
           setStore({ ...store, movie: res.data, loading: false });
         if (nameData === "moviesDiscover")
           setStore({ ...store, moviesDiscover: res.data, loading: false });
+        if (nameData === "detailsSerie")
+          setStore({ ...store, serie: res.data, loading: false });
+        if (nameData === "seriesDiscover")
+          setStore({ ...store, seriesDiscover: res.data, loading: false });
         if (nameData === "myAccount")
           setStore({ ...store, user: res.data, loading: false });
       })
@@ -57,6 +61,7 @@ export const fetchData = (
   getData();
 
   return () => {
+    setStore({ ...store, loading: false, error: null });
     source.cancel();
   };
 };

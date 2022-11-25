@@ -4,7 +4,8 @@ import { MyContext, Icontext } from "../../../../store/AppContext";
 
 type ListsMoviesType = {
   idList: number;
-  setIdList: React.Dispatch<React.SetStateAction<number>>;
+  setIdList: React.Dispatch<React.SetStateAction<number>> ;
+  //setIdList: (idList: number) => void;
 };
 
 const ListsMovies = ({ idList, setIdList }: ListsMoviesType) => {
@@ -21,7 +22,7 @@ const ListsMovies = ({ idList, setIdList }: ListsMoviesType) => {
             &#8592;
           </button>
         )}
-        <h1>{store.listMovie?.name}</h1>
+        <h1 className="title-list">{store.listMovie?.name}</h1>
         <img
           src={`https://image.tmdb.org/t/p/original${store.listMovie?.poster_path}`}
           alt="poster"

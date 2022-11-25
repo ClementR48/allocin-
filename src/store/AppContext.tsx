@@ -1,6 +1,7 @@
 import { createContext, useState } from "react";
 import { IData, IFilm, IList, IMovie } from "../Interfaces/MoviesInterfaces";
 import { INewUser } from "../Interfaces/UserInterfaces";
+import { ISerie } from '../components/Card/Card';
 
 export interface Icontext {
   store: Istore;
@@ -14,8 +15,10 @@ export interface Istore {
   loading: boolean;
   error: string;
   movie: IFilm | null;
-  user: INewUser ;
+  serie: ISerie | null;
+  user: INewUser;
   moviesDiscover: IData | null;
+  seriesDiscover: IData | null;
 }
 
 export const MyContext = createContext<Icontext | null>(null);
@@ -28,7 +31,9 @@ export const AppContext = ({ children }: any) => {
     loading: false,
     error: "",
     movie: null,
+    serie: null,
     moviesDiscover: null,
+    seriesDiscover: null,
     user: {
       avatar: "",
       firstname: "",
